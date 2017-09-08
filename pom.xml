@@ -4,7 +4,7 @@
     <groupId>org.topicquests</groupId>
     <artifactId>tqks-statistics</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <name>tqks-statistics</name>
     <url>https://github.com/topicquests/tqks-statistics</url>
     <developers>
@@ -265,12 +265,12 @@
             <artifactId>json-smart</artifactId>
             <version>2.2.1</version>
  	    </dependency>
- 	    <dependency>
-            <groupId>net.minidev</groupId>
-            <artifactId>accessors-smart</artifactId>
-            <version>1.1</version>
+        <dependency>
+            <groupId>org.topicquests</groupId>
+            <artifactId>tq-support</artifactId>
+            <version>1.6-SNAPSHOT</version>
         </dependency>
- 
+
     </dependencies>
     <reporting>
         <plugins>

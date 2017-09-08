@@ -17,6 +17,9 @@ package org.topicquests.ks;
 
 import java.io.*;
 import java.util.Iterator;
+import java.util.Map;
+
+import org.topicquests.support.config.Configurator;
 
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -27,7 +30,7 @@ import net.minidev.json.parser.JSONParser;
  */
 public class StatisticsUtility {
 	private static StatisticsUtility instance = null;
-	private final String PATH = "SystemStatistics.json";
+	private final String PATH;
 	private JSONObject data;
 	private boolean isSaved = false;
 
@@ -35,6 +38,8 @@ public class StatisticsUtility {
 	 * 
 	 */
 	private StatisticsUtility() throws Exception {
+		Map<String,Object>properties = Configurator.getProperties("stats-config.xml");
+		PATH = (String)properties.get("StatsPath");
 		bootData();
 		isSaved = false;
 	}
