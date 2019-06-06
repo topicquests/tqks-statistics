@@ -4,7 +4,7 @@
     <groupId>org.topicquests</groupId>
     <artifactId>tqks-statistics</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <name>tqks-statistics</name>
     <url>https://github.com/topicquests/tqks-statistics</url>
     <developers>

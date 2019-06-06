@@ -19,6 +19,9 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.topicquests.os.asr.api.IStatisticsClient;
+import org.topicquests.support.ResultPojo;
+import org.topicquests.support.api.IResult;
 import org.topicquests.support.config.Configurator;
 
 import net.minidev.json.JSONObject;
@@ -28,7 +31,7 @@ import net.minidev.json.parser.JSONParser;
  * @author jackpark
  * <p>Simply a counter against any Key</p>
  */
-public class StatisticsUtility {
+public class StatisticsUtility implements IStatisticsClient {
 	private static StatisticsUtility instance = null;
 	private final String PATH;
 	private JSONObject data;
@@ -60,7 +63,7 @@ public class StatisticsUtility {
 	 * and add to it, avoiding the reserved keys defined here
 	 * @param key
 	 */
-	public void addToKey(String key) {
+	public IResult addToKey(String key) {
 		//reset isSaved if someone is using this after it was saved
 		if (isSaved)
 			isSaved = false;
@@ -72,6 +75,7 @@ public class StatisticsUtility {
 				v += 1;
 			data.put(key, v);
 		}
+		return null;
 	}
 	
 	/**
@@ -131,6 +135,30 @@ public class StatisticsUtility {
 			fis.close();
 		} else
 			data = new JSONObject();
+	}
+
+	@Override
+	public IResult getStatistics() {
+		IResult result = new ResultPojo();
+		JSONObject jo = new JSONObject();
+		JSONParser p = new JSONParser(JSONParser.MODE_JSON_SIMPLE);
+		synchronized(data) {
+			try {
+				// clone data
+				jo = (JSONObject)p.parse(data.toJSONString());
+				result.setResultObject(jo);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.addErrorString(e.getMessage());
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public IResult getValueOfKey(String key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
